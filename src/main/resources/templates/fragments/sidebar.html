@@ -1,0 +1,41 @@
+<nav th:fragment="sidebarImports" class="sidebar sidebar-offcanvas " id="sidebar">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/}" >
+          <i class="mdi mdi-home"></i>
+          <span class="menu-title">&nbsp;&nbsp; HOME</span>
+        </a>
+      </li>
+    
+      <li class="nav-item" >
+        <a class="nav-link" data-toggle="collapse" href="#nutritionist">
+          <i class="mdi mdi-account-multiple"></i>
+          <span class="menu-title">&nbsp;&nbsp; NUTRICIONISTAS &nbsp;&nbsp;</span>
+          <i class="mdi mdi-chevron-down"></i>
+        </a>
+
+        <div class="collapse" id="nutritionist">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"><a th:href="@{/nutritionists/record}" class="nav-link">Adicionar Nutricionistas</a></li>
+            <li class="nav-item"><a th:href="@{/nutritionists/list/all}" class="nav-link">Listar Nutricionistas</a></li>
+            </ul>
+          </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#customer">
+          <i class="mdi mdi-account-multiple"></i>
+          <span class="menu-title">&nbsp;&nbsp; CLIENTES &nbsp;&nbsp;</span>
+          <i class="mdi mdi-chevron-down"></i>
+        </a>
+
+        <div class="collapse" id="customer">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"><a th:href="@{/customers/record}" class="nav-link">Adicionar Cliente</a></li>
+            <li class="nav-item"><a th:href="@{/customers/list/all}" class="nav-link">Listar Clientes</a></li>
+            </ul>
+          </div>
+      </li>
+
+    </ul>
+  </nav>

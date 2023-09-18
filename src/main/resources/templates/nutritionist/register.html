@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html
+        lang="pt-br"
+        xmlns:th="http://www.thymeleaf.org">
+
+  <header th:replace="~{fragments/header :: headerImports}"></header>
+
+  <body>
+    <div class="container-scroller">
+
+      <nav th:replace="~{fragments/navbar :: navbarImports}"></nav>
+
+      <div class="container-fluid page-body-wrapper">
+
+        <nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+
+        <div class="main-panel">
+          <div class="content-wrapper">
+
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="row">
+                  <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                    <h3 class="font-weight-bold">Cadastro de Nutricionistas</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <form th:action="@{/nutritionists/register}" method="post" th:object="${nutritionist}" enctype="multipart/form-data">
+              <div class="row">
+<!--                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+
+              <div class="form-group col-6">
+                  <label for="login-acesso" class="label-title">Login de Acesso:</label>
+                  <input type="text" class="form-control" autocomplete="off" th:field="*{username}" id="login-acesso" placeholder="Login... ">
+              </div>
+
+              <div class="form-group col-6">
+                  <label for="senha" class="label-title">Senha:</label>
+                  <input type="password" class="form-control" th:field="*{password}" id="senha" placeholder="********">
+              </div>
+
+
+              </div>
+
+              <div class="row">
+                  <div class="form-group col-6">
+                      <label for="nome" class="label-title">Nome:</label>
+                      <input type="text" class="form-control" autocomplete="off" th:field="*{name}" id="nome" placeholder="Nome... ">
+                  </div>
+
+                  <div class="form-group col-6">
+                      <label for="sobrenome" class="label-title">Sobrenome:</label>
+                      <input type="text" class="form-control" th:field="*{lastname}" id="sobrenome" placeholder="Sobrenome... ">
+                  </div>
+<!--                  <div class="form-group col-4">-->
+<!--                      <label for="arquivo" class="label-title">Imagem de Perfil:</label>-->
+<!--                      <input type="file" class="form-control" name="file" id="arquivo">-->
+<!--                  </div>-->
+              </div>
+
+              <button type="submit" class="btn btn-success btn-rounded mt-4">SALVAR INFORMAÇÕES</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html
+        lang="pt-br"
+        xmlns:th="http://www.thymeleaf.org">
+
+    <header th:replace="~{fragments/header :: headerImports}"></header>
+    <body>
+        <div class="container-scroller">
+            <nav th:replace="~{fragments/navbar :: navbarImports}"></nav>
+
+            <div class="container-fluid page-body-wrapper">
+                <nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+                <div class="main-panel">
+                    <div class="content-wrapper">
+
+                        <div class="row">
+                            <div class="col-md-12 grid-margin">
+                                <div class="row">
+                                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                                        <h3 class="font-weight-bold">Todos os Nutricionistas</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 grid-margin stretch-card">
+                                <div class="card table-bg">
+                                    <div class="card-people mt-auto">
+<!--                                        <h4 class="m-4">Nutricionistas cadastrados no sistema</h4>-->
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Nome</th>
+                                                <th scope="col">Ações</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="nutritionist : ${nutritionists}">
+                                                    <td>
+                                                        <span th:text="${nutritionist.name}"></span>
+                                                        <span th:text="${nutritionist.lastname}"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <a class="btn btn-warning" th:href="@{/nutritionists/edit/{id}(id=${nutritionist.id})}"> <i class="fa fa-edit"></i></a>
+                                                        <a class="btn btn-danger" th:href="@{/nutritionists/delete/{id}(id=${nutritionist.id})}"> <i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <nav class="m-4">
+                                            <ul class="pagination">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link">Anterior</a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item " aria-current="page">
+                                                    <a class="page-link" href="#">2</a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#">Próximo</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 grid-margin transparent">
+                                <!-- conteudo indefinido -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+<!--                <div th:replace="~{fragments/modal :: modalEdit}"></div>-->
+
+
+            </div>
+        </div>
+
+        <div th:replace="~{fragments/footer :: footerImports}"></div>
+    </body>
+</html>
