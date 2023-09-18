@@ -30,3 +30,12 @@ jobs:
 
     - name: Listing contents
       run: ls -la ./target
+    - name: Copiando arquivo para máquina virtual
+      uses: appleboy/scp-action@8a92fcdb1eb4ffbf538b2fa286739760aac8a95b
+      with:
+        port: 22
+        host: nutrija.com.br
+        username: root
+        password: $${{secrets.SENHA_NUTRIJA}}
+        source: "./target/nutri-ja-0.0.1-SNAPSHOT.jar"
+        target: "/root/nutrija/"
