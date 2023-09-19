@@ -4,34 +4,21 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
-public class NutritionistUserDetailsImpl implements UserDetails {
+public record NutritionistUserDetailsImpl(Nutritionist nutritionist) implements UserDetails {
 
-    private Nutritionist nutritionist;
-
-    public NutritionistUserDetailsImpl(Nutritionist nutritionist){
-        this.nutritionist = nutritionist;
-    }
-
-    public Long getId(){
+    public Long getId() {
         return nutritionist.getId();
     }
 
-    public String getName(){
-        return nutritionist.getName();
+    public String getFullName() {
+        return nutritionist.getFullName();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        Perfil perfil = nutritionist.getPerfil();
-//        if(perfil == Perfil.ADMIN){
-//            perfil = Perfil.ADMIN;
-//        }else{
-//            perfil = Perfil.TECNICO;
-//        }
-//        return AuthorityUtils.createAuthorityList(perfil.toString());
-
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -62,9 +49,5 @@ public class NutritionistUserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public Nutritionist getNutritionist() {
-        return nutritionist;
     }
 }

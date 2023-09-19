@@ -16,17 +16,11 @@ public class Nutritionist {
 
     private String password;
 
-    private String name;
-
-    private String lastname;
-
-    private String imageFile;
+    private String fullName;
 
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {this.id = id;}
 
     public String getUsername() {return username;}
 
@@ -36,28 +30,12 @@ public class Nutritionist {
 
     public void setPassword(String password) {this.password = password;}
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getImageFile() {
-        return imageFile;
-    }
-
-    public void setImageFile(String imageFile) {
-        this.imageFile = imageFile;
+    public void setFullName(String name) {
+        this.fullName = name;
     }
 
 }

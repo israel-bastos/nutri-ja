@@ -28,35 +28,15 @@
             </div>
 
             <form th:action="@{/customers/register}" method="post" th:object="${customer}" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="form-group col-6">
-                      <label for="nome" class="label-title">Nome:</label>
-                      <input type="text" class="form-control" th:field="*{name}" id="nome" placeholder="Nome... ">
-                    </div>
-
-                    <div class="form-group col-6">
-                      <label for="sobrenome" class="label-title">Sobrenome:</label>
-                      <input type="text" class="form-control" th:field="*{lastname}" id="sobrenome" placeholder="Sobrenome... ">
-                    </div>
-              </div>
-
               <div class="row">
-<!--                <div class="form-group col-6">-->
-<!--                  <label for="arquivo" class="label-title">Imagem de Perfil:</label>-->
-<!--                  <input type="file" class="form-control" name="file" id="arquivo">-->
-<!--                </div>-->
-
-                <div class="form-group col-6">
-                  <label for="email" class="label-title">Email de Notificação:</label>
-                  <input type="email" class="form-control" th:field="*{notificationEmail}" id="email" placeholder="Email... ">
+                <div class="form-group col-4">
+                  <label for="nome-completo" class="label-title">Nome Completo:</label>
+                  <input type="text" class="form-control" autocomplete="off" th:field="*{fullName}" id="nome-completo" placeholder="Nome Completo... ">
                 </div>
-
-                  <!--                <div class="form-group col-6">-->
-<!--                  <label for="" class="label-title">Nutricionistas:</label>-->
-<!--                  <select name="" id="" class="form-control" th:field="*{perfil}">-->
-<!--                    <option th:each="perfil : ${perfils}" th:text="${perfil}" th:value="${perfil}"></option>-->
-<!--                  </select>-->
-<!--                </div>-->
+                <div class="form-group col-4">
+                  <label for="email" class="label-title">Email de Notificação:</label>
+                  <input type="text" class="form-control" th:field="*{notificationEmail}" id="email" placeholder="Email...">
+                </div>
               </div>
 
               <button type="submit" class="btn btn-success btn-rounded mt-4">SALVAR INFORMAÇÕES</button>

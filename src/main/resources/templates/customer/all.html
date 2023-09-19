@@ -27,7 +27,6 @@
                             <div class="col-md-12 grid-margin stretch-card">
                                 <div class="card table-bg">
                                     <div class="card-people mt-auto">
-<!--                                        <h4 class="m-4">Clientes cadastrados no sistema</h4>-->
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
@@ -40,12 +39,10 @@
                                             <tbody>
                                             <tr th:each="customer : ${customers}">
                                                 <td>
-                                                    <span th:text="${customer.name}"></span>
-                                                    <span th:text="${customer.lastname}"></span>
+                                                    <span th:text="${customer.fullName}"></span>
                                                 </td>
                                                 <td>
-                                                    <span th:text="${customer.nutritionist.name}"></span>
-                                                    <span th:text="${customer.nutritionist.lastname}"></span>
+                                                    <span th:text="${customer.nutritionist.fullName}"></span>
                                                 </td>
                                                 <td th:text="${customer.notificationEmail}"></td>
                                                 <td>
@@ -74,17 +71,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 grid-margin transparent">
-                                <!-- conteudo indefinido -->
-                            </div>
                         </div>
-
                     </div>
                 </div>
-
-<!--                <div th:replace="~{fragments/modal :: modalEdit}"></div>-->
-
-
             </div>
         </div>
 

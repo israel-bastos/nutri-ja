@@ -20,8 +20,8 @@ public class NutritionistUserDetailsService implements UserDetailsService{
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Nutritionist nutritionist = repository.findByUsername(email)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Nutritionist nutritionist = repository.findByUsername(username)
         .orElseThrow( () -> new UsernameNotFoundException("Nutricionista não encontrado na base de dados"));
         return new NutritionistUserDetailsImpl(nutritionist);
     }

@@ -2,14 +2,15 @@ package br.com.grupo.nutrija.application.controller.nutritionist;
 
 import br.com.grupo.nutrija.application.config.SecurityConfig;
 import br.com.grupo.nutrija.application.domain.professional.entity.Nutritionist;
-import br.com.grupo.nutrija.application.domain.user.entity.util.UploadImageUtil;
 import br.com.grupo.nutrija.application.service.NutritionistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -29,41 +30,21 @@ public class AddNutritionistController {
     public ModelAndView register(){
 
         return new ModelAndView("nutritionist/register")
-//                .addObject("perfil", Perfils.value())
                 .addObject("nutritionist", new Nutritionist());
     }
 
     @PostMapping("/register")
-    public ModelAndView register(@ModelAttribute Nutritionist nutritionist, @RequestParam("file") MultipartFile imageFile){
+    public String register(@ModelAttribute Nutritionist nutritionist){
         String hashPassword = SecurityConfig.encoder(nutritionist.getPassword());
         nutritionist.setPassword(hashPassword);
 
-        ModelAndView mv = new ModelAndView("nutritionist/register")
-                .addObject("nutritionist", nutritionist);
+        this.service.save(nutritionist);
+        logger.info("saved nutritionist {}", nutritionist.getId());
 
-        try {
-
-            if(UploadImageUtil.doUploadImage(imageFile)){
-                nutritionist.setImageFile(imageFile.getOriginalFilename());
-            }
-
-            this.service.save(nutritionist);
-
-            logger.info("success saved! {} ", nutritionist.getName());
-
-            return home();
-
-            //TODO - later customize exception
-        } catch (RuntimeException re){
-            mv.addObject("msgError", re.getMessage());
-
-            logger.error(re.getMessage());
-
-            return mv;
-        }
+        return redirectToHome();
     }
 
-    private ModelAndView home(){
-        return new ModelAndView("/home/index");
+    public String redirectToHome(){
+        return "redirect:/";
     }
 }

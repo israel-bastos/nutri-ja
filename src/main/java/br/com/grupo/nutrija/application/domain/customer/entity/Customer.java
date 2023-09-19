@@ -12,16 +12,11 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String fullName;
 
-    private LocalDateTime creation = LocalDateTime.now();
-
-    private String name;
-
-    private String lastname;
+    private LocalDateTime registryDate = LocalDateTime.now();
 
     private String notificationEmail;
-
-    private String imageFile;
 
     @ManyToOne
     private Nutritionist nutritionist;
@@ -30,28 +25,16 @@ public class Customer {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getCreation() {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(creation);
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public String getRegistryDate() {
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(registryDate);
     }
 
     public String getNotificationEmail() {
@@ -60,14 +43,6 @@ public class Customer {
 
     public void setNotificationEmail(String notificationEmail) {
         this.notificationEmail = notificationEmail;
-    }
-
-    public String getImageFile() {
-        return imageFile;
-    }
-
-    public void setImageFile(String imageFile) {
-        this.imageFile = imageFile;
     }
 
     public Nutritionist getNutritionist() {

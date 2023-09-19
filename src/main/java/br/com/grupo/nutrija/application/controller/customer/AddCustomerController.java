@@ -2,22 +2,20 @@ package br.com.grupo.nutrija.application.controller.customer;
 
 import br.com.grupo.nutrija.application.domain.customer.entity.Customer;
 import br.com.grupo.nutrija.application.domain.professional.entity.Nutritionist;
-import br.com.grupo.nutrija.application.domain.professional.entity.NutritionistUserDetailsImpl;
-import br.com.grupo.nutrija.application.domain.user.entity.util.UploadImageUtil;
 import br.com.grupo.nutrija.application.service.CustomerService;
 import br.com.grupo.nutrija.application.service.NutritionistService;
-import br.com.grupo.nutrija.application.service.NutritionistUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/customers")
@@ -42,40 +40,23 @@ public class AddCustomerController {
     }
 
     @PostMapping("/register")
-    public ModelAndView register(@ModelAttribute Customer customer, @RequestParam("file")MultipartFile imageFile){
+    public String register(@ModelAttribute Customer customer){
 
-        String name = SecurityContextHolder.getContext().getAuthentication()
+        String username = SecurityContextHolder.getContext().getAuthentication()
                 .getName();
 
-        Nutritionist nutritionist = nutritionistService.findByName(name);
-        customer.setNutritionist(nutritionist);
+        Optional<Nutritionist> nutritionist = nutritionistService.findByUsername(username);
+        if (nutritionist.isEmpty()) throw new RuntimeException("Problema ao recuperar usuário logado");
 
-        ModelAndView mv = new ModelAndView("customer/register")
-                .addObject("customer", customer);
+        customer.setNutritionist(nutritionist.get());
 
-        try {
+        this.service.save(customer);
+        logger.info(" customer saved {}", customer.getId());
 
-            if(UploadImageUtil.doUploadImage(imageFile)){
-                customer.setImageFile(imageFile.getOriginalFilename());
-            }
-
-            this.service.save(customer);
-
-            logger.info("success saved! {} ", customer.getName());
-
-            return home();
-
-        //TODO - later customize exception
-        } catch (RuntimeException re){
-            mv.addObject("msgError", re.getMessage());
-
-            logger.error(re.getMessage());
-
-            return mv;
-        }
+        return redirectToHome();
     }
 
-    private ModelAndView home(){
-        return new ModelAndView("/home/index");
+    public String redirectToHome(){
+        return "redirect:/";
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NutritionistService {
@@ -33,5 +34,5 @@ public class NutritionistService {
         this.repository.deleteById(id);
     }
 
-    public Nutritionist findByName(String name){return this.repository.findByName(name);}
+    public Optional<Nutritionist> findByUsername(String username){return this.repository.findByUsername(username);}
 }
