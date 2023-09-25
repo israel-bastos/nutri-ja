@@ -1,11 +1,13 @@
 package br.com.grupo.nutrija.application.domain.user;
 
-import br.com.grupo.nutrija.application.domain.Access;
+import br.com.grupo.nutrija.application.domain.UserAccess;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @MappedSuperclass
 public abstract class SystemAccessUser {
@@ -20,15 +22,17 @@ public abstract class SystemAccessUser {
 
     private String fullName;
 
-    private Access access;
+    private LocalDateTime registryDate = LocalDateTime.now();
 
-    public SystemAccessUser(){}
+    private String userAccess;
 
-    protected SystemAccessUser(String username, String password, String fullName, Access access) {
+    protected SystemAccessUser(){}
+
+    protected SystemAccessUser(String username, String password, String fullName, UserAccess userAccess) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
-        this.access = access;
+        this.userAccess = userAccess.name();
     }
 
     public Long getId() {
@@ -51,7 +55,11 @@ public abstract class SystemAccessUser {
         this.fullName = name;
     }
 
-    public Access getAccess() {return access;}
+    public String getRegistryDate() {
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(registryDate);
+    }
 
-    public void setAccess(Access access) {this.access = access;}
+    public String getAccess() {return userAccess;}
+
+    public void setAccess(String userAccess) {this.userAccess = userAccess;}
 }

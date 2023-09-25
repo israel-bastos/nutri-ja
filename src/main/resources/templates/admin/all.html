@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html
+        lang="pt-br"
+        xmlns:th="http://www.thymeleaf.org">
+
+    <header th:replace="~{fragments/header :: headerImports}"></header>
+    <body>
+        <div class="container-scroller">
+            <nav th:replace="~{fragments/navbar :: navbarImports}"></nav>
+
+            <div class="container-fluid page-body-wrapper">
+                <nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+                <div class="main-panel">
+                    <div class="content-wrapper">
+
+                        <div class="row">
+                            <div class="col-md-12 grid-margin">
+                                <div class="row">
+                                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                                        <h3 class="font-weight-bold">Todos os Administradores</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 grid-margin stretch-card">
+                                <div class="card table-bg">
+                                    <div class="card-people mt-auto">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Nome</th>
+                                                <th scope="col">Ações</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="administrator : ${administrators}">
+                                                    <td>
+                                                        <span th:text="${administrator.fullName}"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <a class="btn btn-warning" th:href="@{/admins/edit/{id}(id=${administrator.id})}"> <i class="fa fa-edit"></i></a>
+                                                        <a class="btn btn-danger" th:href="@{/admins/delete/{id}(id=${administrator.id})}"> <i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="~{fragments/footer :: footerImports}"></div>
+    </body>
+</html>

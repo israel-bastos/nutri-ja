@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+        lang="pt-br"
+        xmlns:th="http://www.thymeleaf.org">
+
+  <header th:replace="~{fragments/header :: headerImports}"></header>
+
+  <body>
+    <div class="container-scroller">
+
+      <nav th:replace="~{fragments/navbar :: navbarImports}"></nav>
+
+      <div class="container-fluid page-body-wrapper">
+
+        <nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+
+        <div class="main-panel">
+          <div class="content-wrapper">
+
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="row">
+                  <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                    <h3 class="font-weight-bold">Cadastro de Adminstradores</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <form th:action="@{/admins/register}" method="post" th:object="${administrator}" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="nome-completo" class="label-title">Nome Completo:</label>
+                        <input type="text" class="form-control" autocomplete="off" th:field="*{fullName}" id="nome-completo" placeholder="Nome Completo... ">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="login-acesso" class="label-title">Login de Acesso:</label>
+                        <input type="text" class="form-control" autocomplete="off" th:field="*{username}" id="login-acesso" placeholder="Login... ">
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="senha" class="label-title">Senha:</label>
+                        <input type="password" class="form-control" th:field="*{password}" id="senha" placeholder="********">
+                    </div>
+                </div>
+
+              <button type="submit" class="btn btn-success btn-rounded mt-4">SALVAR INFORMAÇÕES</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="~{fragments/footer :: footerImports}"></div>
+  </body>
+</html>

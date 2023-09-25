@@ -1,4 +1,4 @@
-package br.com.grupo.nutrija.application.controller.nutritionist;
+package br.com.grupo.nutrija.application.controller.administrator;
 
 import br.com.grupo.nutrija.application.config.SecurityConfig;
 import br.com.grupo.nutrija.application.domain.administrator.Administrator;
@@ -16,32 +16,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/nutritionists")
-public class AddNutritionistController {
+@RequestMapping("/admins")
+public class AddAdministratorController {
 
-    private final NutritionistService service;
+    private final AdministratorService service;
 
-    private static final Logger logger = LoggerFactory.getLogger(AddNutritionistController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AddAdministratorController.class);
 
     @Autowired
-    public AddNutritionistController(NutritionistService service) {
+    public AddAdministratorController(AdministratorService service) {
         this.service = service;
     }
 
     @GetMapping("/record")
     public ModelAndView register(){
 
-        return new ModelAndView("nutritionist/register")
-                .addObject("nutritionist", new Nutritionist());
+        return new ModelAndView("admin/register")
+                .addObject("administrator", new Administrator());
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute Nutritionist nutritionist){
-        String hashPassword = SecurityConfig.encoder(nutritionist.getPassword());
-        nutritionist.setPassword(hashPassword);
+    public String register(@ModelAttribute Administrator administrator){
+        String hashPassword = SecurityConfig.encoder(administrator.getPassword());
+        administrator.setPassword(hashPassword);
 
-        this.service.save(nutritionist);
-        logger.info("saved nutritionist {}", nutritionist.getId());
+        this.service.save(administrator);
+        logger.info("saved administrator {}", administrator.getId());
 
         return redirectToHome();
     }

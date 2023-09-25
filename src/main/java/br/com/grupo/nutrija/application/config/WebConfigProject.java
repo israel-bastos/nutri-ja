@@ -1,5 +1,6 @@
 package br.com.grupo.nutrija.application.config;
 
+import br.com.grupo.nutrija.application.service.AdministratorUserDetailsService;
 import br.com.grupo.nutrija.application.service.NutritionistUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +15,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebConfigProject extends WebSecurityConfigurerAdapter{
 
+    private final AdministratorUserDetailsService administratorUserDetailsService;
+
     private final NutritionistUserDetailsService nutritionistUserDetailsService;
 
     @Autowired
-    WebConfigProject(NutritionistUserDetailsService nutritionistService){
+    WebConfigProject(AdministratorUserDetailsService administratorUserDetailsService, NutritionistUserDetailsService nutritionistService){
+        this.administratorUserDetailsService = administratorUserDetailsService;
         this.nutritionistUserDetailsService = nutritionistService;
     }
 
@@ -47,6 +51,9 @@ public class WebConfigProject extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(administratorUserDetailsService)
+        .passwordEncoder(new BCryptPasswordEncoder());
+
         auth.userDetailsService(nutritionistUserDetailsService)
         .passwordEncoder(new BCryptPasswordEncoder());
     }

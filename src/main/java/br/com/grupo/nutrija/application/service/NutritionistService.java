@@ -1,5 +1,6 @@
 package br.com.grupo.nutrija.application.service;
 
+import br.com.grupo.nutrija.application.domain.customer.entity.Customer;
 import br.com.grupo.nutrija.application.domain.nutritionist.entity.Nutritionist;
 import br.com.grupo.nutrija.application.repository.NutritionistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +36,6 @@ public class NutritionistService {
     }
 
     public Optional<Nutritionist> findByUsername(String username){return this.repository.findByUsername(username);}
+
+    public List<Nutritionist> findAllLast5RecentNutritionists() {return this.repository.findAllFirst5RecentNutritionists();}
 }
