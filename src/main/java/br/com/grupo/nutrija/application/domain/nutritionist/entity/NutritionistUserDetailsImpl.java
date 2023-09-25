@@ -1,6 +1,8 @@
-package br.com.grupo.nutrija.application.domain.professional.entity;
+package br.com.grupo.nutrija.application.domain.nutritionist.entity;
 
+import br.com.grupo.nutrija.application.domain.Access;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -18,7 +20,15 @@ public record NutritionistUserDetailsImpl(Nutritionist nutritionist) implements 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        Access access = nutritionist.getAccess();
+        if(access == Access.ADMIN){
+            access = Access.ADMIN;
+
+        } else {
+            access = Access.PROFESSIONAL;
+        }
+
+        return AuthorityUtils.createAuthorityList(access.toString());
     }
 
     @Override

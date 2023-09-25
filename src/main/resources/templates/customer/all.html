@@ -56,15 +56,13 @@
                                         <nav class="m-4">
                                             <ul class="pagination">
                                                 <li class="page-item disabled">
-                                                    <a class="page-link">Anterior</a>
+                                                    <a class="page-link" th:href="@{/customers/list/all/(page=${i})}">Anterior</a>
                                                 </li>
-                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item " aria-current="page">
-                                                    <a class="page-link" href="#">2</a>
+                                                <li class="page-item" th:each=" i : ${#numbers.sequence(1, customers.totalPages)}">
+                                                    <a class="page-link" th:text="${i}" th:href="@{/customers/list/all/(page=${i})}">1</a>
                                                 </li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
                                                 <li class="page-item">
-                                                    <a class="page-link" href="#">Próximo</a>
+                                                    <a class="page-link" th:href="@{/customers/list/all/(page=${customers.getNumber() + 1})}">Próximo</a>
                                                 </li>
                                             </ul>
                                         </nav>

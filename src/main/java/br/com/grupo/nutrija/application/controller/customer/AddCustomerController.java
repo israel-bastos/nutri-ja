@@ -1,7 +1,7 @@
 package br.com.grupo.nutrija.application.controller.customer;
 
 import br.com.grupo.nutrija.application.domain.customer.entity.Customer;
-import br.com.grupo.nutrija.application.domain.professional.entity.Nutritionist;
+import br.com.grupo.nutrija.application.domain.nutritionist.entity.Nutritionist;
 import br.com.grupo.nutrija.application.service.CustomerService;
 import br.com.grupo.nutrija.application.service.NutritionistService;
 import org.slf4j.Logger;

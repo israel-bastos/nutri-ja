@@ -1,6 +1,6 @@
 package br.com.grupo.nutrija.application.service;
 
-import br.com.grupo.nutrija.application.domain.professional.entity.Nutritionist;
+import br.com.grupo.nutrija.application.domain.nutritionist.entity.Nutritionist;
 import br.com.grupo.nutrija.application.repository.NutritionistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

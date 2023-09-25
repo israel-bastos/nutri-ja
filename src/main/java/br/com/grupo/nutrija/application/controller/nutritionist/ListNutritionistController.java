@@ -1,7 +1,7 @@
 
 package br.com.grupo.nutrija.application.controller.nutritionist;
 
-import br.com.grupo.nutrija.application.domain.professional.entity.Nutritionist;
+import br.com.grupo.nutrija.application.domain.nutritionist.entity.Nutritionist;
 import br.com.grupo.nutrija.application.service.NutritionistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
 package br.com.grupo.nutrija.application.domain.customer.entity;
 
-import br.com.grupo.nutrija.application.domain.professional.entity.Nutritionist;
+import br.com.grupo.nutrija.application.domain.nutritionist.entity.Nutritionist;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,7 +34,7 @@ public class Customer {
     }
 
     public String getRegistryDate() {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(registryDate);
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(registryDate);
     }
 
     public String getNotificationEmail() {

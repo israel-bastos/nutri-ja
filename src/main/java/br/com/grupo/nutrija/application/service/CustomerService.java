@@ -3,6 +3,8 @@ package br.com.grupo.nutrija.application.service;
 import br.com.grupo.nutrija.application.domain.customer.entity.Customer;
 import br.com.grupo.nutrija.application.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class CustomerService {
         this.repository.save(customer);
     }
 
-    public List<Customer> findAll() {
-        return this.repository.findAll();
+    public Page<Customer> findAllPageable(Pageable page) {
+        return this.repository.findAll(page);
     }
 
     public List<Customer> findAllLast5RecentCustomers() {
@@ -36,5 +38,4 @@ public class CustomerService {
     public void deleteById(long id){
         this.repository.deleteById(id);
     }
-
 }
