@@ -1,4 +1,4 @@
-package br.com.grupo.nutrija.application.domain.nutritionist.entity;
+package br.com.grupo.nutrija.application.domain.administrator;
 
 import br.com.grupo.nutrija.application.domain.UserAccess;
 import br.com.grupo.nutrija.application.domain.user.SystemAccessUser;
@@ -9,15 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Nutritionist extends SystemAccessUser {
+public class Administrator extends SystemAccessUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Nutritionist() {}
+    public Administrator() {}
 
-    public Nutritionist(String username, String password, String fullName, UserAccess userAccess) {
+    public Administrator(String username, String password, String fullName, UserAccess userAccess) {
         super(username, password, fullName, userAccess);
     }
 }

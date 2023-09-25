@@ -1,27 +1,27 @@
 package br.com.grupo.nutrija.application.service;
 
 import br.com.grupo.nutrija.application.config.SecurityConfig;
-import br.com.grupo.nutrija.application.domain.Access;
-import br.com.grupo.nutrija.application.domain.nutritionist.entity.Nutritionist;
-import br.com.grupo.nutrija.application.repository.NutritionistRepository;
+import br.com.grupo.nutrija.application.domain.UserAccess;
+import br.com.grupo.nutrija.application.domain.administrator.Administrator;
+import br.com.grupo.nutrija.application.repository.AdministratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class InjectDBService {
 
-    private final NutritionistRepository repository;
+    private final AdministratorRepository repository;
 
     @Autowired
-    public InjectDBService(NutritionistRepository repository) {
+    public InjectDBService(AdministratorRepository repository) {
         this.repository = repository;
     }
 
     public void injectDB(){
-        Nutritionist admin = new Nutritionist(
+        Administrator admin = new Administrator(
                 "admin",
                 SecurityConfig.encoder("root"),
-                "admin", Access.ADMIN);
+                "admin", UserAccess.ADMIN);
 
          repository.save(admin);
     }

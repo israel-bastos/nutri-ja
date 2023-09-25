@@ -347,7 +347,7 @@ Version 5.1.2 (2019-11-19)
     Fixed `cut` operations not removing selected content on Android devices when the `paste` plugin is enabled #TINY-4362
     Fixed inline toolbar not constrained to the window width by default #TINY-4314
     Fixed context toolbar split button chevrons pointing right when they should be pointing down #TINY-4257
-    Fixed unable to access the dialog footer in tabbed dialogs on small screens #TINY-4360
+    Fixed unable to userAccess the dialog footer in tabbed dialogs on small screens #TINY-4360
     Fixed mobile table selectors were hard to select with touch by increasing the size #TINY-4366
     Fixed mobile table selectors moving when moving outside the editor #TINY-4366
     Fixed inline toolbars collapsing when using sliding toolbars #TINY-4389
@@ -811,7 +811,7 @@ Version 4.8.2 (2018-08-09)
     Fixed a bug where running getSelectedBlocks with a collapsed selection between block elements would produce incorrect results. #TINY-1787
     Fixed a bug where the ScriptLoaders loadScript method would not work as expected in FireFox when loaded on the same page as a ShadowDOM polyfill. #TINY-1786
     Removed reference to ShadowDOM event.path as Blink based browsers now support event.composedPath. #TINY-1785
-    Fixed a bug where a reference to localStorage would throw an "access denied" error in IE11 with strict security settings. #TINY-1782
+    Fixed a bug where a reference to localStorage would throw an "userAccess denied" error in IE11 with strict security settings. #TINY-1782
     Fixed a bug where pasting using the toolbar button on an inline editor in IE11 would cause a looping behaviour. #TINY-1768
 Version 4.8.1 (2018-07-26)
     Fixed a bug where the content of inline editors was being cleaned on every call of `editor.save()`. #TINY-1783

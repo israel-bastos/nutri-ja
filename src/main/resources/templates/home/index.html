@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
   <header th:replace="~{fragments/header :: headerImports}"></header>
   <body>
@@ -51,6 +52,32 @@
                     </table>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 grid-margin stretch-card">
+                  <div class="card table-bg">
+                      <div class="card-people mt-auto" sec:authorize="hasAuthority('ADMIN')">
+                          <h4 class="m-4">Últimos nutricionistas cadastrados</h4>
+                          <table class="table table-striped">
+                              <thead>
+                                  <tr>
+                                      <th scope="col">Nome do Nutricionista</th>
+                                      <th scope="col">Data de Cadastro</th>
+                                  </tr>
+                              </thead>
+
+                              <tbody>
+                                  <tr th:each="recent: ${recentNutritionists}">
+                                      <td>
+                                          <span th:text="${recent.fullName}"></span>
+                                      </td>
+                                      <td th:text="${recent.registryDate}"></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
               </div>
             </div>
           </div>

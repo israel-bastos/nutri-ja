@@ -1,10 +1,26 @@
-<nav th:fragment="sidebarImports" class="sidebar sidebar-offcanvas " id="sidebar">
+<nav th:fragment="sidebarImports" class="sidebar sidebar-offcanvas " id="sidebar"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <ul class="nav">
       <li class="nav-item">
         <a class="nav-link" th:href="@{/}" >
           <i class="mdi mdi-home"></i>
           <span class="menu-title">&nbsp;&nbsp; HOME</span>
         </a>
+      </li>
+
+      <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+        <a class="nav-link" data-toggle="collapse" href="#admin">
+          <i class="mdi mdi-account-multiple"></i>
+          <span class="menu-title">&nbsp;&nbsp; ADMINSTRADORES &nbsp;&nbsp;</span>
+          <i class="mdi mdi-chevron-down"></i>
+        </a>
+
+        <div class="collapse" id="admin" >
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"><a th:href="@{/admins/record}" class="nav-link">Adicionar Administrador</a></li>
+            <li class="nav-item"><a th:href="@{/admins/list/all}" class="nav-link">Listar Administrador</a></li>
+          </ul>
+        </div>
       </li>
     
       <li class="nav-item" >
@@ -14,9 +30,9 @@
           <i class="mdi mdi-chevron-down"></i>
         </a>
 
-        <div class="collapse" id="nutritionist">
+        <div class="collapse" id="nutritionist" >
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"><a th:href="@{/nutritionists/record}" class="nav-link">Adicionar Nutricionistas</a></li>
+            <li class="nav-item"><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/nutritionists/record}" class="nav-link">Adicionar Nutricionistas</a></li>
             <li class="nav-item"><a th:href="@{/nutritionists/list/all}" class="nav-link">Listar Nutricionistas</a></li>
             </ul>
           </div>
@@ -31,7 +47,7 @@
 
         <div class="collapse" id="customer">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"><a th:href="@{/customers/record}" class="nav-link">Adicionar Cliente</a></li>
+            <li class="nav-item"><a sec:authorize="hasAuthority('PRO')" th:href="@{/customers/record}" class="nav-link">Adicionar Cliente</a></li>
             <li class="nav-item"><a th:href="@{/customers/list/all}" class="nav-link">Listar Clientes</a></li>
             </ul>
           </div>

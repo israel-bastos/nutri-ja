@@ -4,7 +4,7 @@ TinyMCE is the world's most advanced open source core rich text editor.
 
 Trusted by millions of developers, and used by some of the world's largest companies and fastest-growing start-ups, TinyMCE is the WYSIWYG editor that is built to scale, designed to innovate, and is built to thrive with edge-cases.
 
-You can access a [full featured demo of TinyMCE](https://www.tiny.cloud/docs/demo/full-featured/) in the docs on the Tiny website.
+You can userAccess a [full featured demo of TinyMCE](https://www.tiny.cloud/docs/demo/full-featured/) in the docs on the Tiny website.
 
 <p align="center">
   <img alt="Screenshot of the TinyMCE Editor" src="https://www.tiny.cloud/storage/github-readme-images/tinymce-editor.png"\>
