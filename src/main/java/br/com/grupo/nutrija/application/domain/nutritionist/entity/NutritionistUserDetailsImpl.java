@@ -17,9 +17,13 @@ public record NutritionistUserDetailsImpl(Nutritionist nutritionist) implements 
         return nutritionist.getFullName();
     }
 
+    public String displayImage(){
+        return nutritionist.getDisplayImage();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String userAccess = nutritionist.getAccess();
+        String userAccess = nutritionist.userAccess;
         if(userAccess.equalsIgnoreCase(UserAccess.PROFESSIONAL.name())){
             userAccess = UserAccess.PROFESSIONAL.name();
 

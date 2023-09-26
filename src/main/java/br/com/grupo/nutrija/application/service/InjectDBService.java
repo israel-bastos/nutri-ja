@@ -1,7 +1,6 @@
 package br.com.grupo.nutrija.application.service;
 
 import br.com.grupo.nutrija.application.config.SecurityConfig;
-import br.com.grupo.nutrija.application.domain.UserAccess;
 import br.com.grupo.nutrija.application.domain.administrator.Administrator;
 import br.com.grupo.nutrija.application.repository.AdministratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class InjectDBService {
         Administrator admin = new Administrator(
                 "admin",
                 SecurityConfig.encoder("root"),
-                "admin", UserAccess.ADMIN);
+                "admin", "admin.png");
 
          repository.save(admin);
     }

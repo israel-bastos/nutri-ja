@@ -26,9 +26,7 @@ public class AdministratorService {
         return this.repository.findAll();
     }
 
-    public Administrator getById(long id){
-        return this.repository.getById(id);
-    }
+    public Administrator getById(long id){return this.repository.getById(id);}
 
     public void deleteById(long id){
         this.repository.deleteById(id);

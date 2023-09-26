@@ -1,4 +1,6 @@
-<nav th:fragment="navbarImports" class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+<nav th:fragment="navbarImports" class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
       <a class="navbar-brand brand-logo mr-5" th:href="@{/}"><img src="/img/favicon.png" class="mr-2" alt="logo"/>Nutri Já</a>
       <a class="navbar-brand brand-logo-mini" th:href="@{/}"><img src="/img/favicon-min.png" alt="logo"/></a>
@@ -9,16 +11,33 @@
         <span class="icon-menu"></span>
       </button>
 
-      <ul class="navbar-nav navbar-nav-right">
-        <li class="nav-item nav-profile dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <a class="dropdown-item" th:href="@{/logout}">
-                  <i class="mdi mdi-logout-variant"></i>
-                  Logout
-              </a>
-          </a>
-        </li>
-      </ul>
+        <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                    <img th:attr="src=@{'/img/uploads/' + ${#authentication.getPrincipal().displayImage()}}">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" sec:authorize="hasAuthority('ADMIN')"
+                       th:href="@{admins/edit/password(id=${#authentication.getPrincipal.getId()})}">
+
+                        <i class="mdi mdi-pencil"></i>
+                        Editar Perfil
+                    </a>
+
+                    <a class="dropdown-item" sec:authorize="hasAuthority('PROFESSIONAL')"
+                       th:href="@{nutritionists/edit/password(id=${#authentication.getPrincipal.getId()})}">
+
+                        <i class="mdi mdi-pencil"></i>
+                        Editar Perfil
+
+                    </a>
+                    <a class="dropdown-item" th:href="@{/logout}">
+                        <i class="mdi mdi-logout-variant"></i>
+                        Logout
+                    </a>
+                </div>
+            </li>
+        </ul>
 
       <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
         <span class="icon-menu"></span>

@@ -17,9 +17,13 @@ public record AdministratorUserDetailsImpl(Administrator administrator) implemen
         return administrator.getFullName();
     }
 
+    public String displayImage(){
+        return administrator.getDisplayImage();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String userAccess = administrator.getAccess();
+        String userAccess = administrator.userAccess;
         if(userAccess.equalsIgnoreCase(UserAccess.ADMIN.name())){
             userAccess = UserAccess.ADMIN.name();
 
