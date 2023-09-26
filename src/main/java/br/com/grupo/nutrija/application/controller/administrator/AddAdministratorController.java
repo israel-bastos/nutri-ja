@@ -2,17 +2,14 @@ package br.com.grupo.nutrija.application.controller.administrator;
 
 import br.com.grupo.nutrija.application.config.SecurityConfig;
 import br.com.grupo.nutrija.application.domain.administrator.Administrator;
-import br.com.grupo.nutrija.application.domain.nutritionist.entity.Nutritionist;
 import br.com.grupo.nutrija.application.service.AdministratorService;
-import br.com.grupo.nutrija.application.service.NutritionistService;
+import br.com.grupo.nutrija.application.util.UploadImageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -36,14 +33,29 @@ public class AddAdministratorController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute Administrator administrator){
+    public String register(@ModelAttribute Administrator administrator, @RequestParam("file") MultipartFile imageFile){
         String hashPassword = SecurityConfig.encoder(administrator.getPassword());
         administrator.setPassword(hashPassword);
 
-        this.service.save(administrator);
-        logger.info("saved administrator {}", administrator.getId());
+        try {
 
-        return redirectToHome();
+            if(UploadImageUtil.doUploadImage(imageFile)){
+                administrator.setDisplayImage(imageFile.getOriginalFilename());
+            }
+
+            this.service.save(administrator);
+
+            logger.info("success saved! {} ", administrator.getFullName());
+
+            return redirectToHome();
+
+            //TODO - later customize exception
+        } catch (RuntimeException re){
+            new ModelAndView().addObject("msgError", re.getMessage());
+            logger.error(re.getMessage());
+
+            return redirectToHome();
+        }
     }
 
     public String redirectToHome(){

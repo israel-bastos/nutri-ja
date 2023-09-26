@@ -1,10 +1,5 @@
 package br.com.grupo.nutrija.application.domain.user;
 
-import br.com.grupo.nutrija.application.domain.UserAccess;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,31 +7,23 @@ import java.time.format.DateTimeFormatter;
 @MappedSuperclass
 public abstract class SystemAccessUser {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String username;
 
     private String password;
 
     private String fullName;
 
-    private LocalDateTime registryDate = LocalDateTime.now();
+    private final LocalDateTime registryDate = LocalDateTime.now();
 
-    private String userAccess;
+    private String displayImage;
 
     protected SystemAccessUser(){}
 
-    protected SystemAccessUser(String username, String password, String fullName, UserAccess userAccess) {
+    protected SystemAccessUser(String username, String password, String fullName, String displayImage) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
-        this.userAccess = userAccess.name();
-    }
-
-    public Long getId() {
-        return id;
+        this.displayImage = displayImage;
     }
 
     public String getUsername() {return username;}
@@ -59,7 +46,11 @@ public abstract class SystemAccessUser {
         return DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(registryDate);
     }
 
-    public String getAccess() {return userAccess;}
+    public String getDisplayImage() {
+        return displayImage;
+    }
 
-    public void setAccess(String userAccess) {this.userAccess = userAccess;}
+    public void setDisplayImage(String displayImage) {
+        this.displayImage = displayImage;
+    }
 }

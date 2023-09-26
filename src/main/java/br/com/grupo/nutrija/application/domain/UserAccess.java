@@ -4,7 +4,7 @@ public enum UserAccess {
 
     ADMIN("ADMIN"),
 
-    PROFESSIONAL("PRO");
+    PROFESSIONAL("PROFESSIONAL");
 
     private final String userAccess;
 
@@ -12,6 +12,6 @@ public enum UserAccess {
         this.userAccess = userAccess;
     }
 
-    public String getAcesso() {return userAccess;}
+    public String getUserAccess() {return userAccess;}
 
 }

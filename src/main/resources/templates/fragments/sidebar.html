@@ -47,7 +47,7 @@
 
         <div class="collapse" id="customer">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"><a sec:authorize="hasAuthority('PRO')" th:href="@{/customers/record}" class="nav-link">Adicionar Cliente</a></li>
+            <li class="nav-item"><a sec:authorize="hasAuthority('PROFESSIONAL')" th:href="@{/customers/record}" class="nav-link">Adicionar Cliente</a></li>
             <li class="nav-item"><a th:href="@{/customers/list/all}" class="nav-link">Listar Clientes</a></li>
             </ul>
           </div>
