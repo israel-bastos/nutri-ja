@@ -39,7 +39,8 @@
                         </thead>
 
                         <tbody>
-                            <tr th:each="recent: ${recentCustomers}">
+                            <tr th:if="${recent.nutritionist.getUsername().equalsIgnoreCase(#authentication.getName())}"
+                                th:each="recent: ${recentCustomers}">
                                 <td>
                                     <span th:text="${recent.fullName}"></span>
                                 </td>

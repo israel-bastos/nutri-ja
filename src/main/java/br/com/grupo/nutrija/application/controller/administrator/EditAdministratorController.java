@@ -1,5 +1,7 @@
 package br.com.grupo.nutrija.application.controller.administrator;
 
+import br.com.grupo.nutrija.application.config.SecurityConfig;
+import br.com.grupo.nutrija.application.domain.Password;
 import br.com.grupo.nutrija.application.domain.administrator.Administrator;
 import br.com.grupo.nutrija.application.service.AdministratorService;
 import br.com.grupo.nutrija.application.util.UploadImageUtil;
@@ -10,6 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admins/edit")
@@ -55,8 +61,37 @@ public class EditAdministratorController {
         }
     }
 
+    @GetMapping("/password")
+    public ModelAndView editPassword(Principal principal) {
+        Optional<Administrator> administrator = this.service.findByUsername(principal.getName());
+
+        if (administrator.isPresent()){
+            Password password = new Password(administrator.get().getPassword());
+            return new ModelAndView("admin/edit-password")
+                    .addObject("currentPassword", password)
+                    .addObject("password", new Password());
+        }
+
+        throw new NoSuchElementException("Usuário não encontrado");
+    }
+
+    @PostMapping("/password/edited")
+    public String editPassword(Principal principal, Password password) {
+        Optional<Administrator> administrator = this.service.findByUsername(principal.getName());
+
+        if (SecurityConfig.passwordMatcher(password.getActualPassword(), administrator.get().getPassword())){
+            administrator.get().setPassword(SecurityConfig.encoder(password.getNewPassword()));
+            this.service.save(administrator.get());
+        }
+
+        return redirectToHome();
+
+    }
+
     private String redirectAllAdministrators(){
         return "redirect:/admins/list/all";
     }
+
+    private String redirectToHome(){return "redirect:/";}
 
 }

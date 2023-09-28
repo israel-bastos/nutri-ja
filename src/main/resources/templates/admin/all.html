@@ -41,8 +41,17 @@
                                                     </td>
 
                                                     <td>
-                                                        <a class="btn btn-warning" th:href="@{/admins/edit/{id}(id=${administrator.id})}"> <i class="fa fa-edit"></i></a>
-                                                        <a class="btn btn-danger" th:href="@{/admins/delete/{id}(id=${administrator.id})}"> <i class="fa fa-trash"></i></a>
+                                                        <a class="btn btn-success" href="#">
+                                                            <i class="fa-solid fa-paper-plane"></i>
+                                                        </a>
+                                                        <a th:if="${administrator.getUsername().equalsIgnoreCase(#authentication.getName())}"
+                                                           class="btn btn-warning" th:href="@{/admins/edit/{id}(id=${administrator.id})}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a th:if="${administrator.getUsername().equalsIgnoreCase(#authentication.getName())}"
+                                                           class="btn btn-danger" th:href="@{/admins/delete/{id}(id=${administrator.id})}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </tbody>

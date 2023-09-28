@@ -42,7 +42,5 @@ public class HomeController {
         return this.customerService.findAllLast5RecentCustomers();
     }
 
-    private List<Nutritionist> first5RecentNutritionists(){
-        return this.nutritionistService.findAllLast5RecentNutritionists();
-    }
+    private List<Nutritionist> first5RecentNutritionists(){return this.nutritionistService.findAllLast5RecentNutritionists();}
 }

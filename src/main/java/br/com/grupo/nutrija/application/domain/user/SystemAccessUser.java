@@ -34,9 +34,7 @@ public abstract class SystemAccessUser {
 
     public void setPassword(String password) {this.password = password;}
 
-    public String getFullName() {
-        return fullName;
-    }
+    public String getFullName() {return fullName;}
 
     public void setFullName(String name) {
         this.fullName = name;
