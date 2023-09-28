@@ -4,7 +4,7 @@ spring:
 #    username: root
 #    password: root
 
-      url: :${DATABASE_URL}
+      url: ${DATABASE_URL}
       username: ${USER}
       password: ${PASSWORD}
 
