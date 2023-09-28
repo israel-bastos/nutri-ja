@@ -36,20 +36,28 @@
                                                 <th scope="col">Ações</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                            <tr th:each="customer : ${customers}">
-                                                <td>
-                                                    <span th:text="${customer.fullName}"></span>
-                                                </td>
-                                                <td>
-                                                    <span th:text="${customer.nutritionist.fullName}"></span>
-                                                </td>
-                                                <td th:text="${customer.notificationEmail}"></td>
-                                                <td>
-                                                    <a class="btn btn-warning" th:href="@{/customers/edit/{id}(id=${customer.id})}"> <i class="fa fa-edit"></i></a>
-                                                    <a class="btn btn-danger" th:href="@{/customers/delete/{id}(id=${customer.id})}"> <i class="fa fa-trash"></i></a>
-                                                </td>
-                                            </tr>
+                                            <tbody >
+                                                <tr th:if="${customer.nutritionist.getUsername().equalsIgnoreCase(#authentication.getName())}"
+                                                    th:each="customer : ${customers}">
+                                                    <td>
+                                                        <span th:text="${customer.fullName}"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span th:text="${customer.nutritionist.fullName}"></span>
+                                                    </td>
+                                                    <td th:text="${customer.notificationEmail}"></td>
+                                                    <td>
+                                                        <a class="btn btn-success" href="#">
+                                                            <i class="fa-solid fa-paper-plane"></i>
+                                                        </a>
+                                                        <a class="btn btn-warning" th:href="@{/customers/edit/{id}(id=${customer.id})}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a class="btn btn-danger" th:href="@{/customers/delete/{id}(id=${customer.id})}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
 

@@ -8,6 +8,13 @@ public class SecurityConfig {
 
     public static String encoder(String password){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         return passwordEncoder.encode(password);
+    }
+
+    public static boolean passwordMatcher(String actualPassword, String newPassword){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        return passwordEncoder.matches(actualPassword, newPassword);
     }
 }

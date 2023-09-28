@@ -46,6 +46,11 @@
                   <label for="arquivo" class="label-title">Imagem de Perfil:</label>
                   <input type="file" class="form-control" name="file" id="arquivo">
                 </div>
+                <div class="form-group col-6">
+                  <label for="senha" class="label-title">Senha:</label>
+                  <input disabled type="password" class="form-control"
+                         th:value="*{password}" id="senha">
+                </div>
               </div>
               <button type="submit" class="btn btn-success btn-rounded mt-4">SALVAR INFORMAÇÕES</button>
 
