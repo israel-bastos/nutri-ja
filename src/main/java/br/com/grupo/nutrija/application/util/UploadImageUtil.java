@@ -24,13 +24,16 @@ public class UploadImageUtil {
 
             try {
 
-                String filenameDirectory = "C:\\Users\\israel.bastos\\Desktop\\Projeto\\" +
-                        "projeto-intellij\\workspace\\estacio\\nutri-ja\\src\\main\\resources\\" +
-                        "static\\img\\uploads";
+//                String filenameDirectory = "C:\\Users\\israel.bastos\\Desktop\\Projeto\\" +
+//                        "projeto-intellij\\workspace\\estacio\\nutri-ja\\src\\main\\resources\\" +
+//                        "static\\img\\uploads";
+
+                String filenameDirectory = "\\nutri-ja\\src\\main\\resources\\static\\img\\uploads";
 
                 File dir = new File(filenameDirectory);
 
                 if (!dir.exists()) {
+                    dir.mkdirs();
                     logger.warn("failed to create directory at {}", dir.getAbsolutePath());
                 }
 
