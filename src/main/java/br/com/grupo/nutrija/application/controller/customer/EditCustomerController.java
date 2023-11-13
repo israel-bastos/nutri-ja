@@ -4,11 +4,10 @@ import br.com.grupo.nutrija.application.domain.customer.entity.Customer;
 import br.com.grupo.nutrija.application.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/customers/edit")
@@ -27,11 +26,14 @@ public class EditCustomerController {
 
         return new ModelAndView("customer/edit")
                 .addObject("customer", byId);
-
     }
 
     @PostMapping("/edited")
-    public String edit(Customer customer){
+    public String edit(@ModelAttribute Customer customer){
+        double imc = this.service.calculateIMC(customer.getWeight(), customer.getHeight());
+        BigDecimal roundImc = new BigDecimal(imc).setScale(2, BigDecimal.ROUND_HALF_UP);
+        customer.setImc(roundImc.intValue());
+
         this.service.save(customer);
 
         return redirectAllCustomers();

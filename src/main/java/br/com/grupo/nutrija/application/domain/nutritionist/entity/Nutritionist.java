@@ -19,8 +19,8 @@ public class Nutritionist extends SystemAccessUser {
 
     public Nutritionist() {}
 
-    public Nutritionist(String username, String password, String fullName, String displayImage) {
-        super(username, password, fullName, displayImage);
+    public Nutritionist(String username, String password, String fullName, String displayImage, String notificationEmail, String phone) {
+        super(username, password, fullName, displayImage, notificationEmail, phone);
     }
 
     public Long getId() {
@@ -30,4 +30,5 @@ public class Nutritionist extends SystemAccessUser {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

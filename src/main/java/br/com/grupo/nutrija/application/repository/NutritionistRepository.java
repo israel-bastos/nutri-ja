@@ -13,8 +13,6 @@ public interface NutritionistRepository extends JpaRepository<Nutritionist, Long
 
     Optional<Nutritionist> findByUsername(String username);
 
-    Nutritionist findByFullName(String fullName);
-
     @Query(value = "select * from nutritionist limit 5", nativeQuery = true)
     List<Nutritionist> findAllFirst5RecentNutritionists();
 }

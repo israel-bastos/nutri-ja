@@ -27,15 +27,68 @@
               </div>
             </div>
 
-            <form th:action="@{/customers/register}" method="post" th:object="${customer}" enctype="multipart/form-data">
+            <form class="needs-validation" th:action="@{/customers/register}" method="post" th:object="${customer}"
+                  novalidate enctype="multipart/form-data">
               <div class="row">
-                <div class="form-group col-4">
+                <div class="col-form-label col-4">
                   <label for="nome-completo" class="label-title">Nome Completo:</label>
-                  <input type="text" class="form-control" autocomplete="off" th:field="*{fullName}" id="nome-completo" placeholder="Nome Completo... ">
+                  <input type="text" class="form-control" th:field="*{fullName}" id="nome-completo"
+                         placeholder="Nome Completo... " pattern="^[A-Za-z\s.'-]+$" required>
+                  <div class="invalid-feedback">
+                    Nome não pode estar vazio ou conter números.
+                  </div>
                 </div>
-                <div class="form-group col-4">
-                  <label for="email" class="label-title">Email de Notificação:</label>
-                  <input type="email" class="form-control" th:field="*{notificationEmail}" id="email" placeholder="Email...">
+                <div class="col-form-label col-4">
+                  <label for="email" class="label-title">Email:</label>
+                  <input type="email" class="form-control" th:field="*{notificationEmail}" id="email" placeholder="Email..." required>
+                  <div class="invalid-feedback">
+                    Formato de email errado.
+                  </div>
+                </div>
+                <div class="col-form-label col-4">
+                    <label for="celular" class="label-title">Celular:</label>
+                    <input type="text" class="form-control" th:field="*{phone}" id="celular"
+                           placeholder="xx xxxxx-xxxx" pattern="[0-9]{2} [0-9]{5}[0-9]{4}" required>
+                    <div class="invalid-feedback">
+                      Formato de telefone errado.
+                    </div>
+                </div>
+              </div>
+              <br><br><br>
+              <div class="row">
+                <div class="col-md-12 grid-margin">
+                  <div class="row">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                      <h3 class="font-weight-bold">Dados Médicos <i class="fa-solid fa-heart-pulse"></i> </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-form-label col-md-4">
+                  <label for="idade" class="label-title">Idade:</label>
+                  <input type="text" class="form-control" th:field="*{age}" id="idade"
+                         placeholder="Idade... " pattern="^[1-9]\d*$" required>
+                  <div class="invalid-feedback">
+                    Informar idade.
+                  </div>
+                </div>
+                <div class="col-form-label col-md-4">
+                  <label for="peso" class="label-title">Peso em KG:</label>
+                  <input type="text" class="form-control" th:field="*{weight}" id="peso" placeholder="Peso kg..."
+                         pattern="^[0-9]+(\.[1-9]+)?$" required>
+                  <div class="invalid-feedback">
+                    Informar o peso em kg.
+                  </div>
+                </div>
+                <div class="col-form-label col-md-4">
+                  <label for="altura" class="label-title">Altura:</label>
+                  <input type="text" class="form-control" th:field="*{height}" id="altura" placeholder="Altura..."
+                         pattern="^[0-9]+(\.[1-9]+)?$" required>
+                  <div class="invalid-feedback">
+                    Informar a altura.
+                  </div>
                 </div>
               </div>
 

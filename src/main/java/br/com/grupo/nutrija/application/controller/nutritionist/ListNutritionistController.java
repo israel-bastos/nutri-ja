@@ -26,6 +26,12 @@ public class ListNutritionistController {
     public ModelAndView all() {
         List<Nutritionist> all = this.service.findAll();
 
+        if (all.isEmpty()) {
+            return new ModelAndView("nutritionist/all")
+                    .addObject("nutritionists", all)
+                    .addObject("message", "Nenhum nutricionista cadastrado");
+        }
+
         return new ModelAndView("nutritionist/all")
                 .addObject("nutritionists", all);
     }

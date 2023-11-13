@@ -26,6 +26,12 @@ public class ListAdministratorController {
     public ModelAndView all() {
         List<Administrator> all = this.service.findAll();
 
+        if (all.isEmpty()) {
+            return new ModelAndView("admin/all")
+                    .addObject("administrators", all)
+                    .addObject("message", "Nenhum adminstrador cadastrado");
+        }
+
         return new ModelAndView("admin/all")
                 .addObject("administrators", all);
     }

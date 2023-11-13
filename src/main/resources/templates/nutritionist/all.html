@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html
         lang="pt-br"
-        xmlns:th="http://www.thymeleaf.org">
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
     <header th:replace="~{fragments/header :: headerImports}"></header>
     <body>
@@ -31,6 +32,8 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col">Nome</th>
+                                                <th scope="col">Telefone</th>
+                                                <th scope="col">Email</th>
                                                 <th scope="col">Ações</th>
                                             </tr>
                                             </thead>
@@ -39,11 +42,56 @@
                                                     <td>
                                                         <span th:text="${nutritionist.fullName}"></span>
                                                     </td>
-
                                                     <td>
-                                                        <a class="btn btn-success" href="#">
+                                                        <span th:text="${nutritionist.phone}"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span th:text="${nutritionist.notificationEmail}"></span>
+                                                    </td>
+                                                    <td>
+                                                        <!-- Button to trigger modal -->
+                                                        <button th:if="${!nutritionist.getUsername().equalsIgnoreCase(#authentication.getName())}" type="button" class="btn btn-success" data-toggle="modal" data-target="#emailModal">
                                                             <i class="fa-solid fa-paper-plane"></i>
-                                                        </a>
+                                                        </button>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Email</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form th:action="@{/emails/sendEmail}" method="post" enctype="multipart/form-data">
+                                                                            <div class="form-group">
+                                                                                <label for="from">De:</label>
+                                                                                <input type="email" class="form-control" id="from" name="from" required>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="to">Para:</label>
+                                                                                <input type="email" class="form-control" id="to" name="to" required>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="subject">Assunto:</label>
+                                                                                <input type="text" class="form-control" id="subject" name="subject" required>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="body">Mensagem:</label>
+                                                                                <textarea class="form-control" id="body" name="body" rows="5" required></textarea>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="attachment">Arquivo:</label>
+                                                                                <input type="file" class="form-control-file" id="attachment" name="attachment">
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <a th:if="${nutritionist.getUsername().equalsIgnoreCase(#authentication.getName())}"
                                                            class="btn btn-warning" th:href="@{/nutritionists/edit/{id}(id=${nutritionist.id})}">
                                                             <i class="fa fa-edit"></i>
@@ -54,6 +102,11 @@
                                                         </a>
                                                     </td>
                                                 </tr>
+                                            </tbody>
+                                            <tbody th:if="nutritionists.isEmpty">
+                                            <tr>
+                                                <td colspan="4" class="text-center"><h3 th:text="${message}"></h3></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>

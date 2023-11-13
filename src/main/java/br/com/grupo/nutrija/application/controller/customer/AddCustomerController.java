@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Controller
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class AddCustomerController {
 
     private final CustomerService service;
+
     private final NutritionistService nutritionistService;
 
     private static final Logger logger = LoggerFactory.getLogger(AddCustomerController.class);
@@ -49,6 +51,10 @@ public class AddCustomerController {
         if (nutritionist.isEmpty()) throw new RuntimeException("Problema ao recuperar usuário logado");
 
         customer.setNutritionist(nutritionist.get());
+
+        double imc = this.service.calculateIMC(customer.getWeight(), customer.getHeight());
+        BigDecimal roundImc = new BigDecimal(imc).setScale(2, BigDecimal.ROUND_HALF_UP);
+        customer.setImc(roundImc.intValue());
 
         this.service.save(customer);
         logger.info(" customer saved {}", customer.getId());
