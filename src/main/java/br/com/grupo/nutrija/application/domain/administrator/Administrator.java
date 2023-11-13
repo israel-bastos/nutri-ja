@@ -19,8 +19,8 @@ public class Administrator extends SystemAccessUser {
 
     public Administrator() {}
 
-    public Administrator(String username, String password, String fullName, String displayImage) {
-        super(username, password, fullName, displayImage);
+    public Administrator(String username, String password, String fullName, String displayImage, String notificationEmail, String phone) {
+        super(username, password, fullName, displayImage, notificationEmail, phone);
     }
 
     public Long getId() {

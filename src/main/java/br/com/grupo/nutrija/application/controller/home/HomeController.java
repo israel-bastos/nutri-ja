@@ -28,6 +28,7 @@ public class HomeController {
     @GetMapping
     public ModelAndView home(){
         List<Customer> first5RecentCustomers = findFirst5RecentCustomers();
+
         List<Nutritionist> first5RecentNutritionists = first5RecentNutritionists();
 
         ModelAndView modelAndView = new ModelAndView("home/index");

@@ -25,5 +25,4 @@ public class NutritionistUserDetailsService implements UserDetailsService{
         .orElseThrow( () -> new UsernameNotFoundException("Nutricionista não encontrado na base de dados"));
         return new NutritionistUserDetailsImpl(nutritionist);
     }
-    
 }

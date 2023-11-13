@@ -20,7 +20,8 @@ public class InjectDBService {
         Administrator admin = new Administrator(
                 "admin",
                 SecurityConfig.encoder("root"),
-                "admin", "admin.png");
+                "Nutricionista Administradora", "admin.png",
+                "israelbastos22@gmail.com", "21 999999999");
 
          repository.save(admin);
     }

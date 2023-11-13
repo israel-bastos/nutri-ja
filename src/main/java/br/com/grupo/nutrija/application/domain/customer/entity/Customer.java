@@ -18,8 +18,34 @@ public class Customer {
 
     private String notificationEmail;
 
+    private int age;
+
+    private int weight;
+
+    private double height;
+
+    private double imc;
+
+    private String phone;
+
     @ManyToOne
     private Nutritionist nutritionist;
+
+    public Customer() {}
+
+    public Customer(String fullName, LocalDateTime registryDate, String notificationEmail, Nutritionist nutritionist,
+                    int age, int weight, double imc, double height, String phone) {
+
+        this.fullName = fullName;
+        this.registryDate = registryDate;
+        this.notificationEmail = notificationEmail;
+        this.nutritionist = nutritionist;
+        this.age = age;
+        this.weight = weight;
+        this.imc = imc;
+        this.height = height;
+        this.phone = phone;
+    }
 
     public Long getId() {
         return id;
@@ -51,5 +77,45 @@ public class Customer {
 
     public void setNutritionist(Nutritionist nutritionist) {
         this.nutritionist = nutritionist;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age=age;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight=weight;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height=height;
+    }
+
+    public double getImc() {
+        return imc;
+    }
+
+    public void setImc(double imc) {
+        this.imc=imc;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String cellPhone) {
+        this.phone =cellPhone;
     }
 }

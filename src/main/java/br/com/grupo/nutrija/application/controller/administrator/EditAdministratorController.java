@@ -39,11 +39,12 @@ public class EditAdministratorController {
     }
 
     @PostMapping("/edited")
-    public String edit(Administrator administrator, @RequestParam("file") MultipartFile imageFile){
+    public String edit(@ModelAttribute Administrator administrator, @RequestParam("file") MultipartFile imageFile){
         try {
-
-            if(UploadImageUtil.doUploadImage(imageFile)){
+            if(UploadImageUtil.doUploadImage(imageFile) && !imageFile.isEmpty()){
                 administrator.setDisplayImage(imageFile.getOriginalFilename());
+            } else {
+                administrator.setDisplayImage(administrator.getDisplayImage());
             }
 
             this.service.save(administrator);

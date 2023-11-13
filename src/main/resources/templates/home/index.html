@@ -24,10 +24,41 @@
               </div>
             </div>
 
+              <div class="row">
+                  <div class="col-md-12 grid-margin stretch-card">
+                      <div class="card table-bg">
+                          <div class="card-people mt-auto" sec:authorize="hasAuthority('ADMIN')">
+                              <h4 class="m-4">Últimos clientes cadastrados</h4>
+                              <table class="table table-striped">
+                                  <thead>
+                                  <tr>
+                                      <th scope="col">Nome do Cliente</th>
+                                      <th scope="col">Data de Cadastro</th>
+                                      <th scope="col">Nutricionista Responsável</th>
+                                  </tr>
+                                  </thead>
+
+                                  <tbody>
+                                      <tr th:each="recent: ${recentCustomers}">
+                                          <td>
+                                              <span th:text="${recent.fullName}"></span>
+                                          </td>
+                                          <td th:text="${recent.registryDate}"></td>
+                                          <td>
+                                              <span th:text="${recent.nutritionist.fullName}"></span>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
             <div class="row">
               <div class="col-md-12 grid-margin stretch-card">
                 <div class="card table-bg">
-                  <div class="card-people mt-auto">
+                  <div class="card-people mt-auto" sec:authorize="hasAuthority('PROFESSIONAL')">
                     <h4 class="m-4">Últimos clientes cadastrados</h4>
                     <table class="table table-striped">
                         <thead>

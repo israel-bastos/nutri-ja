@@ -21,38 +21,60 @@
               <div class="col-md-12 grid-margin">
                 <div class="row">
                   <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                    <h3 class="font-weight-bold">Cadastro de Nutricionistas</h3>
+                    <h3 class="font-weight-bold">Editar Nutricionistas</h3>
                   </div>
                 </div>
               </div>
             </div>
 
-            <form th:action="@{/nutritionists/edit/edited}" method="post" th:object="${nutritionist}" enctype="multipart/form-data">
+            <form class="needs-validation" th:action="@{/nutritionists/edit/edited}" method="post" th:object="${nutritionist}"
+                  novalidate enctype="multipart/form-data">
               <div class="row">
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="*{password}">
+                <input type="hidden" th:field="*{displayImage}">
 
-                <div class="form-group col-6">
+                <div class="col-form-label col-md-6">
                   <label for="login-acesso" class="label-title">Login de Acesso:</label>
-                  <input type="text" class="form-control" autocomplete="off" th:field="*{username}" id="login-acesso" placeholder="Login... ">
+                  <input type="text" class="form-control" th:field="*{username}" id="login-acesso"
+                         placeholder="Login... " pattern="[a-zA-Z]{4,}" required>
+                  <div class="invalid-feedback">
+                    Login deve ser maior do que 4 caracteres e conter só letras.
+                  </div>
                 </div>
-                <div class="form-group col-6">
+                <div class="col-form-label col-md-6">
                   <label for="nome-completo" class="label-title">Nome Completo:</label>
-                  <input type="text" class="form-control" autocomplete="off" th:field="*{fullName}" id="nome-completo" placeholder="Nome Completo... ">
+                  <input type="text" class="form-control" th:field="*{fullName}" id="nome-completo"
+                         placeholder="Nome Completo... " pattern="^[A-Za-z\s.'-]+$" required>
+                  <div class="invalid-feedback">
+                    Nome não pode estar vazio ou conter números.
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-6">
+                <div class="col-form-label col-md-6">
+                  <label for="email" class="label-title">Email:</label>
+                  <input type="email" class="form-control" th:field="*{notificationEmail}"
+                         id="email" placeholder="Email..." required>
+                  <div class="invalid-feedback">
+                    Formato de email errado.
+                  </div>
+                </div>
+                <div class="col-form-label col-md-6">
                   <label for="arquivo" class="label-title">Imagem de Perfil:</label>
                   <input type="file" class="form-control" name="file" id="arquivo">
                 </div>
-                <div class="form-group col-6">
-                  <label for="senha" class="label-title">Senha:</label>
-                  <input disabled type="password" class="form-control"
-                         th:value="*{password}" id="senha">
+                <div class="col-form-label col-md-6" >
+                  <label for="celular" class="label-title">Celular:</label>
+                  <input type="text" class="form-control" th:field="*{phone}" id="celular" style="width: 30%;"
+                         placeholder="xx xxxxx-xxxx" pattern="[0-9]{2} [0-9]{5}[0-9]{4}" required>
+                  <div class="invalid-feedback">
+                    Formato de telefone errado.
+                  </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-success btn-rounded mt-4">SALVAR INFORMAÇÕES</button>
+
+              <div class="row">
+                <button type="submit" class="btn btn-success btn-rounded mt-4">SALVAR INFORMAÇÕES</button>
+              </div>
 
             </form>
           </div>

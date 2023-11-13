@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @Query(value = "select * from customer limit 5", nativeQuery = true)
+    @Query(value = "select * from customer limit 5;", nativeQuery = true)
     List<Customer> findAllFirst5RecentCustomers();
+
+    @Query(value = "select * from customer where age >= 40 and imc >= 25 OR imc <= 19;", nativeQuery = true)
+    List<Customer> analizeCustomer();
 }

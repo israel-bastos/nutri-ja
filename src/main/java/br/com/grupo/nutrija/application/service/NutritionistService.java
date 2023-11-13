@@ -1,7 +1,7 @@
 package br.com.grupo.nutrija.application.service;
 
-import br.com.grupo.nutrija.application.domain.customer.entity.Customer;
 import br.com.grupo.nutrija.application.domain.nutritionist.entity.Nutritionist;
+import br.com.grupo.nutrija.application.repository.CustomerRepository;
 import br.com.grupo.nutrija.application.repository.NutritionistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,12 @@ public class NutritionistService {
 
     private final NutritionistRepository repository;
 
+    private final CustomerRepository customerRepository;
+
     @Autowired
-    NutritionistService(NutritionistRepository repository) {
+    NutritionistService(NutritionistRepository repository, CustomerRepository customerRepository) {
         this.repository = repository;
+        this.customerRepository = customerRepository;
     }
 
     public void save(Nutritionist customer){

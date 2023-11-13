@@ -3,13 +3,21 @@ package br.com.grupo.nutrija.application.config;
 import br.com.grupo.nutrija.application.service.AdministratorUserDetailsService;
 import br.com.grupo.nutrija.application.service.NutritionistUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +31,11 @@ public class WebConfigProject extends WebSecurityConfigurerAdapter{
     WebConfigProject(AdministratorUserDetailsService administratorUserDetailsService, NutritionistUserDetailsService nutritionistService){
         this.administratorUserDetailsService = administratorUserDetailsService;
         this.nutritionistUserDetailsService = nutritionistService;
+    }
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
     }
 
     @Override
@@ -50,7 +63,6 @@ public class WebConfigProject extends WebSecurityConfigurerAdapter{
         http.rememberMe()
                 .tokenValiditySeconds(21600)
                 .key("remember-key");
-        
     }
 
     @Override
@@ -60,5 +72,15 @@ public class WebConfigProject extends WebSecurityConfigurerAdapter{
 
         auth.userDetailsService(nutritionistUserDetailsService)
         .passwordEncoder(new BCryptPasswordEncoder());
+    }
+
+    private class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
+
+        @Override
+        public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+                                            AuthenticationException exception) throws IOException, ServletException {
+
+            response.sendRedirect("/login?error=true");
+        }
     }
 }

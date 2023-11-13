@@ -4,9 +4,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-    <header th:replace="~{fragments/header :: headerImports}">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    </header>
+    <header th:replace="~{fragments/header :: headerImports}"></header>
     <body>
         <div class="container-scroller">
             <nav th:replace="~{fragments/navbar :: navbarImports}"></nav>
@@ -20,12 +18,7 @@
                             <div class="col-md-12 grid-margin">
                                 <div class="row">
                                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                        <h3 class="font-weight-bold">Todos os Clientes</h3>
-                                    </div>
-                                    <div sec:authorize="hasAuthority('PROFESSIONAL')">
-                                        <a class="btn btn-info" th:action="@{/customer/analyze}" th:href="@{/customers/analyze}">
-                                            Analisar
-                                        </a>
+                                        <h3 class="font-weight-bold">Clientes Observados</h3>
                                     </div>
                                 </div>
                             </div>
@@ -44,11 +37,6 @@
                                                 <th scope="col">Ações</th>
                                             </tr>
                                             </thead>
-                                            <tbody th:if="customers.isEmpty">
-                                            <tr>
-                                                <td colspan="4" class="text-center"><h3 th:text="${message}"></h3></td>
-                                            </tr>
-                                            </tbody>
                                             <tbody th:if="customers.isNotEmpty">
                                                 <tr th:each="customer : ${customers}">
                                                     <td>
@@ -101,6 +89,10 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                            <tbody th:if="customers.isEmpty">
+                                                <tr>
+                                                    <td colspan="4" class="text-center"><h3 th:text="${message}"></h3></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -111,16 +103,12 @@
                                                 <th scope="col">Nome</th>
                                                 <th scope="col">Idade</th>
                                                 <th scope="col">Peso</th>
+                                                <th style="color: red; font-weight: bold;" scope="col">IMC</th>
                                                 <th scope="col">Nutricionista Resposável</th>
                                                 <th scope="col">E-mail</th>
                                                 <th scope="col">Ações</th>
                                             </tr>
                                             </thead>
-                                            <tbody th:if="customers.isEmpty">
-                                            <tr>
-                                                <td colspan="4" class="text-center"><h3 th:text="${message}"></h3></td>
-                                            </tr>
-                                            </tbody>
                                             <tbody th:if="customers.isNotEmpty">
                                                 <tr th:if="${customer.nutritionist.getUsername().equalsIgnoreCase(#authentication.getName())}"
                                                     th:each="customer : ${customers}">
@@ -132,6 +120,11 @@
                                                     </td>
                                                     <td>
                                                         <span th:text="${customer.weight}"></span> kg
+                                                    </td>
+                                                    <td>
+                                                        <span style="font-size: 15px; font-weight: bold; color: red;" th:text="${customer.imc}"></span>
+                                                        <span style="font-size: 15px; font-weight: bold; color: red;">kg</span>
+                                                    </td>
                                                     <td>
                                                         <span th:text="${customer.nutritionist.fullName}"></span>
                                                     </td>
@@ -189,7 +182,11 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-
+                                            <tbody th:if="customers.isEmpty">
+                                                <tr>
+                                                    <td colspan="4" class="text-center"><h3 th:text="${message}"></h3></td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -200,9 +197,6 @@
             </div>
         </div>
 
-        <footer th:replace="~{fragments/footer :: footerImports}"></footer>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <div th:replace="~{fragments/footer :: footerImports}"></div>
     </body>
 </html>

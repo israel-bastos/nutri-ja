@@ -9,6 +9,6 @@ public class NutriJaApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(NutriJaApplication.class, args);
-    }
 
+    }
 }
